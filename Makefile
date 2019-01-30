@@ -1,4 +1,6 @@
-RACOEXEFLAGS=--collects-path $(shell readlink -m $$(which racket)/../../share/racket/collects) --exf-clear ++exf -m ++exf -U ++exf --
+COLLECTSPATH=$(shell racket -e '(require setup/dirs)' -e '(display (path->string (find-collects-dir)))')
+
+RACOEXEFLAGS=--collects-path $(shell readlink -m $(COLLECTSPATH)) --exf-clear ++exf -m ++exf -U ++exf --
 
 .PHONY : all
 all : mceval lazy-mceval
